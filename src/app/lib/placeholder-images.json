@@ -1,0 +1,41 @@
+
+{
+  "placeholderImages": [
+    {
+      "id": "prop-1",
+      "description": "Modern suburban house with large windows",
+      "imageUrl": "https://picsum.photos/seed/prop1/800/600",
+      "imageHint": "modern house"
+    },
+    {
+      "id": "prop-2",
+      "description": "Luxury downtown condominium with city view",
+      "imageUrl": "https://picsum.photos/seed/prop2/800/600",
+      "imageHint": "luxury condo"
+    },
+    {
+      "id": "prop-3",
+      "description": "Industrial loft apartment in renovated warehouse",
+      "imageUrl": "https://picsum.photos/seed/prop3/800/600",
+      "imageHint": "loft apartment"
+    },
+    {
+      "id": "prop-4",
+      "description": "Charming colonial style family home",
+      "imageUrl": "https://picsum.photos/seed/prop4/800/600",
+      "imageHint": "colonial house"
+    },
+    {
+      "id": "prop-5",
+      "description": "Modern glass office building",
+      "imageUrl": "https://picsum.photos/seed/prop5/800/600",
+      "imageHint": "office building"
+    },
+    {
+      "id": "hero-bg",
+      "description": "Stunning aerial view of a growing city skyline",
+      "imageUrl": "https://picsum.photos/seed/city/1920/1080",
+      "imageHint": "city skyline"
+    }
+  ]
+}
