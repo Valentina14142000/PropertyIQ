@@ -29,11 +29,6 @@ PropertyIQ is a sophisticated, AI-powered real estate investment analysis platfo
 - `src/components`: Reusable UI components and dashboard elements.
 - `src/lib`: Utility functions, mock data, and constants.
 
-## 🏁 Getting Started
-
-1.  **Dashboard**: Explore the [Portal Dashboard](/dashboard) to see your portfolio overview.
-2.  **Analyze**: Visit the [Properties](/dashboard/properties) page to run an AI analysis on specific listings.
-3.  **Trends**: Check the [Market Trends](/dashboard/market) page for the latest regional forecasts.
 
 
 Built by Valentina Kiyungi.
