@@ -37,7 +37,7 @@
 ### 1. Clone the Repository
 
 ```bash
-git clone [https://github.com/Valentina14142000/property-iq.git](https://github.com/Valentina14142000/property-iq.git)
+git clone github repo
 cd property-iq
 ```
 
