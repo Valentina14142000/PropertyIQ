@@ -15,7 +15,7 @@
 </div>
 
 <p align="center">
-  <img src="docs/screenshots/dashboard.png" alt="PropertyIQ dashboard" width="900">
+  <img src="docs/screenshots/overview.png" alt="PropertyIQ dashboard" width="900">
 </p>
 
 > **Disclaimer:** PropertyIQ is a research and education tool. AI output and calculators are not financial, tax or legal advice. Verify every figure before investing.
