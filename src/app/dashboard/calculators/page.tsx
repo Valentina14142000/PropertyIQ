@@ -13,6 +13,8 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Slider } from "@/components/ui/slider"
+import { Separator } from "@/components/ui/separator"
+import { mortgagePayment } from "@/lib/metrics"
 import { 
   Calculator, 
   Home, 
@@ -37,10 +39,16 @@ export default function CalculatorsPage() {
   const [monthlyRent, setMonthlyRent] = useState(3000)
   const [monthlyExpenses, setMonthlyExpenses] = useState(800)
   
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search)
+    const num = (k: string) => { const v = Number(q.get(k)); return Number.isFinite(v) && v > 0 ? v : null }
+    const price = num("price"), rent = num("rent"), exp = num("expenses")
+    if (price) { setPurchasePrice(price); setLoanAmount(Math.round(price * 0.8)) }
+    if (rent) setMonthlyRent(rent)
+    if (exp) setMonthlyExpenses(exp)
+  }, [])
+
   // ROI Calculations
-  const downPayment = purchasePrice * (downPaymentPct / 100)
-  const annualCashFlow = (monthlyRent - monthlyExpenses) * 12
-  const cashOnCash = downPayment > 0 ? (annualCashFlow / downPayment) * 100 : 0
 
   // Mortgage Calculator State
   const [loanAmount, setLoanAmount] = useState(320000)
@@ -48,13 +56,23 @@ export default function CalculatorsPage() {
   const [loanTerm, setLoanTerm] = useState(30)
   
   // Mortgage Calculations
-  const monthlyRate = interestRate / 100 / 12
-  const numberOfPayments = loanTerm * 12
-  const monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) / (Math.pow(1 + monthlyRate, numberOfPayments) - 1)
+  const [taxPct, setTaxPct] = useState(1.2)
+  const [insurance, setInsurance] = useState(1200)
+  const monthlyPayment = mortgagePayment(loanAmount, interestRate, loanTerm)
+  const monthlyTax = (loanAmount * taxPct) / 100 / 12
+  const monthlyInsurance = insurance / 12
+  const totalMonthly = monthlyPayment + monthlyTax + monthlyInsurance
+  const totalInterest = monthlyPayment * loanTerm * 12 - loanAmount
+
+  const downPayment = purchasePrice * (downPaymentPct / 100)
+  const roiPayment = mortgagePayment(purchasePrice - downPayment, interestRate, loanTerm)
+  const annualCashFlow = (monthlyRent - monthlyExpenses - roiPayment) * 12
+  const cashOnCash = downPayment > 0 ? (annualCashFlow / downPayment) * 100 : 0
 
   const pieData = [
     { name: "Principal & Interest", value: monthlyPayment, color: "hsl(var(--primary))" },
-    { name: "Taxes & Insurance (Est)", value: monthlyPayment * 0.2, color: "hsl(var(--accent))" },
+    { name: "Property tax", value: monthlyTax, color: "hsl(var(--accent))" },
+    { name: "Insurance", value: monthlyInsurance, color: "hsl(var(--muted-foreground))" },
   ]
 
   return (
@@ -65,11 +83,11 @@ export default function CalculatorsPage() {
       </div>
 
       <Tabs defaultValue="roi" className="space-y-6">
-        <TabsList className="bg-muted p-1 rounded-xl">
-          <TabsTrigger value="roi" className="rounded-lg px-8 py-2 font-headline data-[state=active]:bg-primary data-[state=active]:text-white">
+        <TabsList className="bg-muted p-1 rounded-xl w-full sm:w-auto">
+          <TabsTrigger value="roi" className="rounded-lg px-4 sm:px-8 py-2 font-headline data-[state=active]:bg-primary data-[state=active]:text-white">
             ROI Calculator
           </TabsTrigger>
-          <TabsTrigger value="mortgage" className="rounded-lg px-8 py-2 font-headline data-[state=active]:bg-primary data-[state=active]:text-white">
+          <TabsTrigger value="mortgage" className="rounded-lg px-4 sm:px-8 py-2 font-headline data-[state=active]:bg-primary data-[state=active]:text-white">
             Mortgage Simulator
           </TabsTrigger>
         </TabsList>
@@ -123,20 +141,20 @@ export default function CalculatorsPage() {
                         id="rent" 
                         type="number" 
                         value={monthlyRent}
-                        onChange={(e) => setMonthlyRent(Number(e.target.value))}
+                        onChange={(e) => setMonthlyRent(Math.max(0, Number(e.target.value)))}
                         className="pl-9"
                       />
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="expenses">Monthly Expenses</Label>
+                    <Label htmlFor="expenses">Operating costs / mo</Label>
                     <div className="relative">
                       <Receipt className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                       <Input 
                         id="expenses" 
                         type="number" 
                         value={monthlyExpenses}
-                        onChange={(e) => setMonthlyExpenses(Number(e.target.value))}
+                        onChange={(e) => setMonthlyExpenses(Math.max(0, Number(e.target.value)))}
                         className="pl-9"
                       />
                     </div>
@@ -165,12 +183,12 @@ export default function CalculatorsPage() {
                   
                   <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/10">
                     <div>
-                      <p className="text-xs text-white/60">Annual Cashflow</p>
-                      <p className="text-xl font-bold font-headline">${annualCashFlow.toLocaleString()}</p>
+                      <p className="text-xs text-white/60">Annual cash flow (after mortgage)</p>
+                      <p className="text-xl font-bold font-headline">${Math.round(annualCashFlow).toLocaleString()}</p>
                     </div>
                     <div>
                       <p className="text-xs text-white/60">Cash Invested</p>
-                      <p className="text-xl font-bold font-headline">${downPayment.toLocaleString()}</p>
+                      <p className="text-xl font-bold font-headline">${Math.round(downPayment).toLocaleString()}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -181,7 +199,7 @@ export default function CalculatorsPage() {
                   <div className="flex gap-3 text-sm text-muted-foreground">
                     <Info className="w-5 h-5 text-accent shrink-0" />
                     <p>
-                      ROI calculations are estimates based on standard market data. Actual returns may vary due to maintenance, vacancy rates, and financing costs.
+                      Cash flow is rent minus operating costs (tax, insurance, upkeep) minus the mortgage payment, using the rate and term from the Mortgage tab ({interestRate}% / {loanTerm} yrs). Actual returns may vary due to maintenance, vacancy rates, and financing costs.
                     </p>
                   </div>
                 </CardContent>
@@ -241,6 +259,17 @@ export default function CalculatorsPage() {
                     onValueChange={(v) => setLoanTerm(v[0])}
                   />
                 </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="tax">Property tax (% / yr)</Label>
+                    <Input id="tax" type="number" step="0.1" min="0" value={taxPct} onChange={(e) => setTaxPct(Math.max(0, Number(e.target.value)))} />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="ins">Insurance ($ / yr)</Label>
+                    <Input id="ins" type="number" min="0" value={insurance} onChange={(e) => setInsurance(Math.max(0, Number(e.target.value)))} />
+                  </div>
+                </div>
               </CardContent>
             </Card>
 
@@ -273,9 +302,11 @@ export default function CalculatorsPage() {
                 <div className="text-center mt-4">
                   <p className="text-sm text-muted-foreground">Total Monthly Payment</p>
                   <h3 className="text-4xl font-bold font-headline text-primary mt-1">
-                    ${(monthlyPayment * 1.2).toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                    ${totalMonthly.toLocaleString(undefined, { maximumFractionDigits: 2 })}
                   </h3>
                 </div>
+
+                <p className="text-xs text-muted-foreground mt-2">Total interest over the loan: <b>${Math.max(0, totalInterest).toLocaleString(undefined, { maximumFractionDigits: 0 })}</b></p>
 
                 <div className="w-full mt-8 space-y-3">
                   {pieData.map((item, idx) => (

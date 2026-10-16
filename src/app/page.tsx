@@ -48,7 +48,7 @@ export default function Home() {
                   Analyze Properties with <span className="text-accent">Precision.</span>
                 </h1>
                 <p className="text-xl text-muted-foreground leading-relaxed max-w-xl">
-                  PropertyIQ leverages advanced AI to help you identify high-yield investment opportunities, simulate mortgage scenarios, and generate real-time market reports.
+                  PropertyIQ leverages advanced AI to help you identify high-yield investment opportunities, simulate mortgage scenarios, and generate on-demand market reports.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button asChild size="lg" className="bg-primary text-white font-headline h-14 px-8 text-lg rounded-xl">
@@ -56,22 +56,13 @@ export default function Home() {
                       Get Started Free <ArrowRight className="w-5 h-5" />
                     </Link>
                   </Button>
-                  <Button variant="outline" size="lg" className="h-14 px-8 text-lg rounded-xl border-primary/20 text-primary font-headline">
-                    View Demo
+                  <Button asChild variant="outline" size="lg" className="h-14 px-8 text-lg rounded-xl border-primary/20 text-primary font-headline">
+                    <Link href="/dashboard/calculators">Try the calculators</Link>
                   </Button>
                 </div>
-                <div className="flex items-center gap-6 pt-4">
-                  <div className="flex -space-x-3">
-                    {[1,2,3,4].map(i => (
-                      <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-muted overflow-hidden">
-                        <Image src={`https://picsum.photos/seed/user${i}/100/100`} width={40} height={40} alt="User" />
-                      </div>
-                    ))}
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    Trusted by <span className="font-bold text-primary">500+</span> serious investors
-                  </p>
-                </div>
+                <p className="text-sm text-muted-foreground pt-2">
+                  Free to use &bull; No sign-up &bull; Your properties stay private in your browser
+                </p>
               </div>
               <div className="relative animate-in zoom-in-95 duration-700">
                 <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-8 border-white/50">
@@ -90,7 +81,7 @@ export default function Home() {
                     <div className="bg-accent/10 p-2 rounded-lg">
                       <TrendingUp className="w-5 h-5 text-accent" />
                     </div>
-                    <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Projected ROI</span>
+                    <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Example ROI</span>
                   </div>
                   <div className="text-3xl font-headline font-bold text-primary">12.4%</div>
                 </div>
@@ -148,11 +139,9 @@ export default function Home() {
               <BarChart3 className="w-6 h-6 text-primary" />
               <span className="text-xl font-headline font-bold text-primary">PropertyIQ</span>
             </Link>
-            <p className="text-sm text-muted-foreground">© 2024 PropertyIQ Inc. All rights reserved.</p>
+            <p className="text-sm text-muted-foreground">AI output is for research only and is not financial advice.</p>
             <div className="flex gap-6">
-              <Link href="#" className="text-sm text-muted-foreground hover:text-primary">Terms</Link>
-              <Link href="#" className="text-sm text-muted-foreground hover:text-primary">Privacy</Link>
-              <Link href="#" className="text-sm text-muted-foreground hover:text-primary">Contact</Link>
+              <a href="https://github.com/Valentina14142000/PropertyIQ" target="_blank" rel="noreferrer" className="text-sm text-muted-foreground hover:text-primary">GitHub</a>
             </div>
           </div>
         </div>

@@ -8,8 +8,6 @@ import {
   Building2, 
   Calculator, 
   TrendingUp, 
-  UserCircle,
-  LogOut,
   BarChart3
 } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -57,11 +55,11 @@ export function DashboardNav() {
                 <SidebarMenuItem key={item.name}>
                   <SidebarMenuButton
                     asChild
-                    isActive={pathname === item.href}
+                    isActive={(item.href === "/dashboard" ? pathname === item.href : pathname.startsWith(item.href))}
                     tooltip={item.name}
                     className={cn(
                       "transition-all duration-200",
-                      pathname === item.href 
+                      (item.href === "/dashboard" ? pathname === item.href : pathname.startsWith(item.href)) 
                         ? "bg-accent text-white hover:bg-accent/90" 
                         : "text-white/80 hover:bg-white/10 hover:text-white"
                     )}
@@ -77,21 +75,10 @@ export function DashboardNav() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="p-4 border-t border-sidebar-border">
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton className="text-white/80 hover:bg-white/10 hover:text-white">
-              <UserCircle className="w-5 h-5" />
-              <span>My Profile</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton className="text-white/80 hover:bg-white/10 hover:text-white">
-              <LogOut className="w-5 h-5" />
-              <span>Logout</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
+      <SidebarFooter className="p-4 border-t border-sidebar-border group-data-[collapsible=icon]:hidden">
+        <p className="text-[11px] leading-relaxed text-white/60">
+          Your properties are saved privately in this browser. AI output is for research only, not financial advice.
+        </p>
       </SidebarFooter>
     </Sidebar>
   )

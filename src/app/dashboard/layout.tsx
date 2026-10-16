@@ -1,25 +1,17 @@
-
-import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar"
+import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar"
 import { DashboardNav } from "@/components/dashboard-nav"
 
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
-      <div className="flex h-screen w-full overflow-hidden bg-background">
-        <DashboardNav />
-        <SidebarInset className="flex flex-col flex-1 overflow-auto">
-          <header className="h-16 border-b bg-card flex items-center px-8 shrink-0">
-            <h1 className="text-xl font-headline font-semibold text-primary">Portal Dashboard</h1>
-          </header>
-          <main className="p-6 md:p-10 flex-1">
-            {children}
-          </main>
-        </SidebarInset>
-      </div>
+      <DashboardNav />
+      <SidebarInset className="min-w-0">
+        <header className="sticky top-0 z-30 h-14 sm:h-16 border-b bg-card/95 backdrop-blur flex items-center gap-3 px-4 sm:px-8 shrink-0">
+          <SidebarTrigger aria-label="Toggle navigation" />
+          <h1 className="text-lg sm:text-xl font-headline font-semibold text-primary">Portal Dashboard</h1>
+        </header>
+        <main className="p-4 sm:p-6 md:p-10 flex-1 min-w-0">{children}</main>
+      </SidebarInset>
     </SidebarProvider>
   )
 }

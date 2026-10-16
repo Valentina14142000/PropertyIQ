@@ -1,78 +1,59 @@
-# 🏢 PropertyIQ | Real Estate Investment Portal
+# PropertyIQ
 
-[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat&logo=next.js&logoColor=white)](https://nextjs.org/)
-[![Genkit](https://img.shields.io/badge/Firebase-Genkit_%2B_Gemini-FFCA28?style=flat&logo=firebase&logoColor=black)](https://firebase.google.com/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.0%2B-38BDF8?style=flat&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+**AI-assisted real estate investment analysis.** Track properties, see real return metrics, simulate mortgages, and get AI-written investment assessments and market outlooks.
+
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-38BDF8?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Gemini](https://img.shields.io/badge/AI-Google_Gemini-4285F4?logo=google&logoColor=white)](https://ai.google.dev/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**PropertyIQ** is a sophisticated, AI-powered real estate investment analysis platform built to help investors make data-driven decisions with absolute precision.
+> **Disclaimer:** AI output and calculators are for research and education only. They are not financial, tax or legal advice. Verify every figure before investing.
 
----
+## What it does
 
-## ✨ Key Features
+| Feature | How it works |
+| --- | --- |
+| **Property tracker** | Add your own properties (price, rent, size, growth). Search, filter by type, and sort by price, yield or growth. Data is saved in your browser. |
+| **Live dashboard** | Portfolio value, average gross yield, estimated monthly cash flow, a 5-year value projection, yield by property type and a ranked list of best opportunities, all computed from your properties. |
+| **Return metrics** | Gross yield, cap rate, monthly cash flow and cash-on-cash return per property, using transparent assumptions shown in the app. |
+| **AI investment analysis** | Gemini reviews a property and its metrics and returns a score, opportunities, risks, insights and a recommendation. |
+| **AI market reports** | Pick a region, property type and horizon to get a structured market outlook you can copy. |
+| **Calculators** | ROI (cash-on-cash after mortgage) and mortgage simulator with property tax, insurance and total interest. Open any property in the calculators with its numbers pre-filled. |
 
-* **AI Investment Analysis:** Leverage Firebase Genkit-powered AI to analyze property listings, identify hidden opportunities, and comprehensively assess risks.
-* **Portfolio Dashboard:** Visualize portfolio performance, rental yields, and growth trends with dynamic, interactive charts.
-* **Financial Simulators:** 
-  * **ROI Calculator:** Estimate cash-on-cash returns and annual cash flow based on detailed purchase inputs.
-  * **Mortgage Simulator:** Model principal and interest payments with adjustable loan terms and parameters.
-* **Market Intelligence:** Generate AI-driven market trend reports tailored to specific regions and property classes.
-* **Property Directory:** Browse curated investment listings featuring high-yield potential.
+## Architecture
 
----
+- **Next.js 15 (App Router)**, React 19, TypeScript, Tailwind CSS, shadcn/ui, Recharts.
+- **Server routes** `/api/analyze` and `/api/market-report` validate input with Zod, rate-limit per IP, and call the Gemini REST API with retries, model fallback and automatic model discovery. The API key never reaches the browser.
+- **No database or login required.** Properties live in `localStorage`; the app works for anyone immediately.
 
-## 🛠️ Tech Stack
-
-* **Framework:** Next.js 15 (App Router)
-* **AI Engine:** Firebase Genkit with Google Gemini
-* **Backend, Database & Auth:** Firebase
-* **UI Components:** Shadcn UI & Lucide React Icons
-* **Styling:** Tailwind CSS
-* **Data Visualization:** Recharts
-
----
-
-## 🚀 Quick Start
-
-### 1. Clone the Repository
+## Run locally
 
 ```bash
-git clone github repo
-cd property-iq
-```
-
-### 2. Install Dependencies
-
-```Bash
+git clone https://github.com/Valentina14142000/PropertyIQ.git
+cd PropertyIQ
 npm install
-# or
-yarn install
-# or
-pnpm install
+cp .env.example .env.local
 ```
 
-### 3. Configure Environment Variables
+Edit `.env.local` and set `GEMINI_API_KEY` (free key: https://aistudio.google.com/app/apikey), then:
 
-Create a .env.local file in the root directory and add your Firebase and Genkit configuration keys:   
-
-```Code snippet
-NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_api_key
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_firebase_project_id
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
-NEXT_PUBLIC_FIREBASE_APP_ID=your_firebase_app_id
-GEMINI_API_KEY=your_gemini_api_key
-```
-
-4. Run Development Server
-
-```Bash
+```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open http://localhost:3000 in your browser to explore the PropertyIQ portal.
+Open http://localhost:9002.
+
+## Deploy to Vercel
+
+1. Import the repository at https://vercel.com/new (framework preset: Next.js).
+2. Add the environment variable `GEMINI_API_KEY`.
+3. Deploy. If the site asks for a Vercel login, turn off **Deployment Protection** in Project Settings.
+
+## Calculation assumptions
+
+Used for per-property metrics (editable in `src/lib/metrics.ts`): 20% down, 6.5% interest, 30-year term, 5% vacancy, 1.2% property tax, 0.5% insurance, 1% maintenance (all as shown in the app).
+
+## License
+
+MIT
