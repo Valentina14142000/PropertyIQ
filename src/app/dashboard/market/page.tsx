@@ -86,7 +86,7 @@ export default function MarketTrendsPage() {
     <div className="space-y-8 max-w-5xl mx-auto animate-in fade-in duration-500">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h2 className="text-3xl font-headline font-bold text-primary">Market Insights</h2>
+          <h2 className="text-2xl sm:text-3xl font-headline font-bold text-primary">Market Insights</h2>
           <p className="text-muted-foreground">AI-generated market trend forecasts and analysis.</p>
         </div>
         <div className="flex items-center gap-2 text-sm text-accent font-medium bg-accent/10 px-3 py-1.5 rounded-full border border-accent/20">

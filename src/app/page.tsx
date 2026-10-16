@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Navigation */}
-      <header className="px-6 lg:px-12 h-20 flex items-center bg-transparent absolute top-0 w-full z-10">
+      <header className="px-4 sm:px-6 lg:px-12 h-16 sm:h-20 flex items-center bg-transparent absolute top-0 w-full z-10">
         <Link href="/" className="flex items-center gap-2">
           <div className="bg-primary rounded-lg p-1.5">
             <BarChart3 className="w-6 h-6 text-white" />
@@ -25,7 +25,7 @@ export default function Home() {
             Property<span className="text-accent">IQ</span>
           </span>
         </Link>
-        <nav className="ml-auto flex items-center gap-8">
+        <nav className="ml-auto flex items-center gap-4 sm:gap-8">
           <Link href="#features" className="text-sm font-medium text-primary/80 hover:text-primary transition-colors hidden md:block">Features</Link>
           <Link href="#about" className="text-sm font-medium text-primary/80 hover:text-primary transition-colors hidden md:block">About</Link>
           <Button asChild className="bg-primary text-white font-headline px-6 rounded-full hover:bg-primary/90 transition-all">
@@ -36,27 +36,27 @@ export default function Home() {
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-background">
+        <section className="relative pt-24 pb-14 sm:pt-32 sm:pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-background">
           <div className="absolute top-0 right-0 -z-10 w-1/2 h-full opacity-10 blur-3xl bg-gradient-to-l from-accent to-transparent" />
-          <div className="container px-6 mx-auto">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="container px-4 sm:px-6 mx-auto">
+            <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
               <div className="space-y-8 animate-in slide-in-from-left-8 duration-700">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-sm font-semibold">
                   <Zap className="w-4 h-4" /> Smart Real Estate Investing
                 </div>
-                <h1 className="text-5xl lg:text-7xl font-headline font-bold text-primary leading-[1.1]">
+                <h1 className="text-4xl sm:text-5xl lg:text-7xl font-headline font-bold text-primary leading-[1.1]">
                   Analyze Properties with <span className="text-accent">Precision.</span>
                 </h1>
-                <p className="text-xl text-muted-foreground leading-relaxed max-w-xl">
+                <p className="text-base sm:text-xl text-muted-foreground leading-relaxed max-w-xl">
                   PropertyIQ leverages advanced AI to help you identify high-yield investment opportunities, simulate mortgage scenarios, and generate on-demand market reports.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Button asChild size="lg" className="bg-primary text-white font-headline h-14 px-8 text-lg rounded-xl">
+                  <Button asChild size="lg" className="bg-primary text-white font-headline h-12 sm:h-14 px-8 text-lg rounded-xl">
                     <Link href="/dashboard" className="flex items-center gap-2">
                       Get Started Free <ArrowRight className="w-5 h-5" />
                     </Link>
                   </Button>
-                  <Button asChild variant="outline" size="lg" className="h-14 px-8 text-lg rounded-xl border-primary/20 text-primary font-headline">
+                  <Button asChild variant="outline" size="lg" className="h-12 sm:h-14 px-8 text-lg rounded-xl border-primary/20 text-primary font-headline">
                     <Link href="/dashboard/calculators">Try the calculators</Link>
                   </Button>
                 </div>
@@ -91,10 +91,10 @@ export default function Home() {
         </section>
 
         {/* Feature Grid */}
-        <section id="features" className="py-24 bg-white">
-          <div className="container px-6 mx-auto">
+        <section id="features" className="py-14 sm:py-24 bg-white">
+          <div className="container px-4 sm:px-6 mx-auto">
             <div className="text-center max-w-2xl mx-auto mb-16 space-y-4">
-              <h2 className="text-4xl font-headline font-bold text-primary tracking-tight">Built for Data-Driven Investors</h2>
+              <h2 className="text-3xl sm:text-4xl font-headline font-bold text-primary tracking-tight">Built for Data-Driven Investors</h2>
               <p className="text-lg text-muted-foreground">Everything you need to build and manage a profitable real estate portfolio in one intuitive platform.</p>
             </div>
             <div className="grid md:grid-cols-3 gap-8">
@@ -118,13 +118,13 @@ export default function Home() {
         </section>
 
         {/* Call to Action */}
-        <section className="py-24 bg-primary relative overflow-hidden">
+        <section className="py-14 sm:py-24 bg-primary relative overflow-hidden">
           <div className="absolute top-0 right-0 opacity-10">
              <BarChart3 className="w-96 h-96 -rotate-12 translate-x-20 -translate-y-20" />
           </div>
-          <div className="container px-6 mx-auto text-center relative z-10">
-            <h2 className="text-4xl font-headline font-bold text-white mb-6">Ready to Scale Your Portfolio?</h2>
-            <p className="text-xl text-white/70 mb-10 max-w-2xl mx-auto">Join the new era of property investing. Get the insights you need to make confident, profitable decisions every time.</p>
+          <div className="container px-4 sm:px-6 mx-auto text-center relative z-10">
+            <h2 className="text-3xl sm:text-4xl font-headline font-bold text-white mb-6">Ready to Scale Your Portfolio?</h2>
+            <p className="text-base sm:text-xl text-white/70 mb-10 max-w-2xl mx-auto">Join the new era of property investing. Get the insights you need to make confident, profitable decisions every time.</p>
             <Button asChild size="lg" className="bg-accent text-white hover:bg-accent/90 px-10 h-14 rounded-full text-lg font-headline shadow-lg shadow-accent/20">
               <Link href="/dashboard">Access Dashboard Now</Link>
             </Button>
@@ -152,7 +152,7 @@ export default function Home() {
 
 function FeatureCard({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) {
   return (
-    <div className="p-8 rounded-3xl bg-background border border-muted hover:border-accent/30 transition-all group">
+    <div className="p-6 sm:p-8 rounded-3xl bg-background border border-muted hover:border-accent/30 transition-all group">
       <div className="mb-6 inline-block p-4 bg-white rounded-2xl shadow-sm group-hover:shadow-md transition-shadow">
         {icon}
       </div>

@@ -78,7 +78,7 @@ export default function CalculatorsPage() {
   return (
     <div className="space-y-8 max-w-5xl mx-auto animate-in fade-in duration-500">
       <div>
-        <h2 className="text-3xl font-headline font-bold text-primary">Financial Simulators</h2>
+        <h2 className="text-2xl sm:text-3xl font-headline font-bold text-primary">Financial Simulators</h2>
         <p className="text-muted-foreground">Plan your next move with our precision calculators.</p>
       </div>
 
@@ -93,7 +93,7 @@ export default function CalculatorsPage() {
         </TabsList>
 
         <TabsContent value="roi" className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
             <Card className="shadow-md border-none">
               <CardHeader>
                 <CardTitle className="font-headline text-primary flex items-center gap-2">
@@ -172,7 +172,7 @@ export default function CalculatorsPage() {
                   <div className="flex justify-between items-end">
                     <div>
                       <p className="text-sm text-white/70">Cash-on-Cash Return</p>
-                      <h3 className="text-5xl font-bold font-headline mt-1">
+                      <h3 className="text-4xl sm:text-5xl font-bold font-headline mt-1">
                         {cashOnCash.toFixed(2)}%
                       </h3>
                     </div>
@@ -209,7 +209,7 @@ export default function CalculatorsPage() {
         </TabsContent>
 
         <TabsContent value="mortgage" className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
             <Card className="shadow-md border-none">
               <CardHeader>
                 <CardTitle className="font-headline text-primary flex items-center gap-2">
