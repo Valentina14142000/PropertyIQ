@@ -36,7 +36,7 @@ There is no account and no database: your properties are stored privately in you
 - **Calculators** - ROI after mortgage, and a mortgage simulator with property tax, insurance and total interest. Open any property in the calculators with its numbers pre-filled.
 - **Responsive** - collapsible sidebar on desktop, slide-out menu on phones.
 
-## Screenshots
+## Layout
 
 | Dashboard | Properties |
 | --- | --- |
